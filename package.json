@@ -1,0 +1,31 @@
+{
+  "name": "utilbuybot",
+  "version": "1.0.0",
+  "description": "A bot that enables Nigerian Telegram users purchase utilities (Airtime,Data,Cable Subscription,Educational Pins and Electricity Bills) at a lesser price  without having to visit a website",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "type": "module",
+  "author": "developed @scriptonite",
+  "license": "ISC",
+  "dependencies": {
+    "ascii-table3": "^0.8.2",
+    "axios": "^1.4.0",
+    "date-and-time": "^3.0.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "follow-redirects": "^1.15.2",
+    "jsonwebtoken": "^9.0.1",
+    "localtunnel": "^2.0.2",
+    "mongoose": "^6.12.0",
+    "node-cache": "^5.1.2",
+    "node-cron": "^3.0.2",
+    "rate-limiter-flexible": "^3.0.0",
+    "telegraf": "^4.12.2",
+    "validator": "^13.9.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.11"
+  }
+}
