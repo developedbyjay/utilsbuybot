@@ -33,11 +33,13 @@ export const maskedCharacters = (char, n) => {
 export const userAccountText = (user) => {
   let account_details = "";
   user.account_number.forEach((el) => {
-    account_details += `BANK-NAME: <b>${el.bank}</b>\nACCOUNT-NUMBER: <b>${el.nuban
-      }</b>\nACCOUNT-NAME: <b>${el.bank === "Providus Bank"
+    account_details += `BANK-NAME: <b>${el.bank}</b>\nACCOUNT-NUMBER: <b>${
+      el.nuban
+    }</b>\nACCOUNT-NAME: <b>${
+      el.bank === "Providus Bank"
         ? "VPAY COLLECTION"
         : user.account_name.replace(user.account_name, "UTILSBUYBOT")
-      }</b>\n\n`;
+    }</b>\n\n`;
   });
   return account_details;
 };
@@ -82,8 +84,10 @@ export const checkAndProcessPayment = async (req) => {
     await helper.sendMessage(
       bot,
       process.env.PURCHASE_CHANNEL_ID,
-      `USER WITH THE ID ${user.id
-      } FUND THEIR WALLET WITH #${amount} \n \nBALANCE BEFORE: #<b>${user.wallet - amount
+      `USER WITH THE ID ${
+        user.id
+      } FUND THEIR WALLET WITH #${amount} \n \nBALANCE BEFORE: #<b>${
+        user.wallet - amount
       }</b> \nBALANCE AFTER: #<b>${user.wallet}</b>`
     );
   } catch (err) {
@@ -125,7 +129,7 @@ export const updateUserAccount = async (req) => {
 
 export const mongo = helper.catchAsync(async () => {
   mongoose.set("strictQuery", true);
-  await mongoose.connect(process.env.DATABASE);
+  mongoose.connect(process.env.DATABASE);
   console.log("DB connected");
 });
 
@@ -170,15 +174,18 @@ export const loadRequest = helper.catchAsync(async (ctx, next) => {
     if (+wallet >= +ctx.session.creditAmount) {
       switch (ctx.session.hostname) {
         case "arisedataapi.com.ng":
-          path = `{\"network\": ${ctx.session.network_id
-            },\r\n \"amount\" :${Math.round(
-              +ctx.session.creditAmount
-            )}, \r\n \"mobile_number\": "${ctx.session.mobile
-            }",\r\n \"Ported_number\":true,\r\n \"airtime_type\":\"VTU\"}`;
+          path = `{\"network\": ${
+            ctx.session.network_id
+          },\r\n \"amount\" :${Math.round(
+            +ctx.session.creditAmount
+          )}, \r\n \"mobile_number\": "${
+            ctx.session.mobile
+          }",\r\n \"Ported_number\":true,\r\n \"airtime_type\":\"VTU\"}`;
           break;
         case "benzoni.ng":
-          path = `/api/v2/airtime/?api_key=${process.env.API_2}&product_code=${ctx.session.network_id_2
-            }&phone=${ctx.session.mobile}&amount=${+ctx.session.creditAmount}`;
+          path = `/api/v2/airtime/?api_key=${process.env.API_2}&product_code=${
+            ctx.session.network_id_2
+          }&phone=${ctx.session.mobile}&amount=${+ctx.session.creditAmount}`;
           break;
         default:
           console.error("error from switching api");
@@ -200,15 +207,16 @@ export const loadRequest = helper.catchAsync(async (ctx, next) => {
       switch (ctx.session.hostname) {
         case "arisedataapi.com.ng":
           path = `{\"network\": ${+ctx.session.planDetails
-            .network},\r\n\"mobile_number\": "${ctx.session.mobile
-            }",\r\n\"plan\": ${+ctx.session.planDetails
-              .dataplan_id},\r\n\"Ported_number\":true}`;
+            .network},\r\n\"mobile_number\": "${
+            ctx.session.mobile
+          }",\r\n\"plan\": ${+ctx.session.planDetails
+            .dataplan_id},\r\n\"Ported_number\":true}`;
 
           break;
         case "benzoni.ng":
           path =
             ctx.session.network_id_2 === "mtn_custom" &&
-              ctx.session.planDetails.plan_type === "GT"
+            ctx.session.planDetails.plan_type === "GT"
               ? `/api/v2/directdata/?api_key=${process.env.API_2}&product_code=${ctx.session.planDetails.dataplan2_id}&phone=${ctx.session.mobile}`
               : `/api/v2/datashare/?api_key=${process.env.API_2}&product_code=${ctx.session.planDetails.dataplan2_id}&phone=${ctx.session.mobile}`;
 
