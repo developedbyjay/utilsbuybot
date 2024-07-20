@@ -30,7 +30,6 @@ import {
   checkAndProcessPayment,
   updateUserAccount,
 } from "./utils/base-help.js";
-import helper, { helper_base } from "./utils/helper-base.js";
 
 dotenv.config({ path: "config.env" });
 
