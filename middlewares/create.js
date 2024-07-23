@@ -11,10 +11,10 @@ user_save.use(
     if (ctx.chat.type === "channel") return;
     //  check if user is a member of the channel
     const channel_check = await helper.channelStatus(ctx);
-    if (ctx.session.user && (channel_check === true)) return next();
+    if (ctx.session.user && channel_check === true) return next();
 
-    if(ctx.session.user && (channel_check === false)){
-      await helper.del(ctx)
+    if (ctx.session.user && channel_check === false) {
+      await helper.del(ctx);
       return helper.sendButtons(ctx, ctx.chat.id, context.channel_text, [
         [{ text: "JOIN CHANNEL", url: process.env.CHANNEL_LINK }],
         [{ text: "NEXT", callback_data: "channel_pass" }],
@@ -24,17 +24,17 @@ user_save.use(
     const user = await getUser(ctx.chat.id);
 
     // SET DEFAULT BOT SESSION SETTINGS
-    ctx.session.MODEL = "LOADED";
+    ctx.session.MODEL = "RE-LOADED";
 
     if (ctx.from) {
       // If user exists in database , store user in session then return next()
-      if (user && (channel_check === true)) {
+      if (user && channel_check === true) {
         ctx.session.user = user;
         return next();
       }
-      
-      if(user && (channel_check === false)){
-        await helper.del(ctx)
+
+      if (user && channel_check === false) {
+        await helper.del(ctx);
         return helper.sendButtons(ctx, ctx.chat.id, context.channel_text, [
           [{ text: "JOIN CHANNEL", url: process.env.CHANNEL_LINK }],
           [{ text: "NEXT", callback_data: "channel_pass" }],
@@ -58,7 +58,7 @@ user_save.use(
         });
         saved_user.token = createSendToken(saved_user);
         ctx.session.user = await saved_user.save();
-        if(channel_check === false){
+        if (channel_check === false) {
           return helper.sendButtons(ctx, ctx.chat.id, context.channel_text, [
             [{ text: "JOIN CHANNEL", url: process.env.CHANNEL_LINK }],
             [{ text: "NEXT", callback_data: "channel_pass" }],
