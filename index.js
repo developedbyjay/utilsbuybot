@@ -27,14 +27,12 @@ helper.catchAsync(async () => {
 })();
 
 app.listen(process.env.PORT, async () => {
-  console.log("Listening on port", process.env.PORT)
+  console.log("Listening on port", process.env.PORT);
   // Delete Purchase Histories
-  // await cron.deletePurchaseHistories()
+  await cron.deletePurchaseHistories();
   // Delete Webhook sessions
-  // await cron.deleteSessions()
+  await cron.deleteSessions();
 });
-
-
 
 process.on("unhandledRejection", async (err) => {
   await helper.sendMessage(
