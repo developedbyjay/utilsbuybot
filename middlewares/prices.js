@@ -23,9 +23,10 @@ price_action.action(
     }
     ctx.session.check_price_dataplans = data.filter(
       (el) => el.isDisabled === false
-    );;
-    const text = "<pre>select your desired network</pre>\n<code>For a clearer view of the prices, kindly change your chat text settings to '13' or lesser</code>\n\nprices <b>(LOADED | RELOADED)</b>";
-  
+    );
+    const text =
+      "<pre>select your desired network</pre>\n<code>For a clearer view of the prices, kindly change your chat text settings to '13' or lesser</code>\n\nprices <b>(LOADED | RELOADED)</b>";
+
     const messageButtons = [
       [
         { text: "MTN", callback_data: "mtn" },
@@ -50,9 +51,9 @@ price_action.action(
     await helper.ansQ(ctx, "processing....");
     ctx.session.plan_name = ctx.match[0];
     if (!ctx.session.check_price_dataplans) {
-      await helper.ansQdel(ctx,'click on check prices in the HOMEPAGE...')
-      const check = await helper.channelStatus(ctx)
-      return startHandler({ctx, check});
+      await helper.ansQdel(ctx, "click on check prices in the HOMEPAGE...");
+      const check = await helper.channelStatus(ctx);
+      return startHandler({ ctx, check });
     }
     ctx.session.sortedPlan = ctx.session.check_price_dataplans.filter(
       (el) => el.plan_network === ctx.match[0].toUpperCase()
@@ -66,9 +67,9 @@ price_action.action(
   helper.catchAsync(async (ctx) => {
     helper.ansQ(ctx, "processing....");
     if (!ctx.session.sortedPlan || !ctx.session.check_price_dataplans) {
-      await helper.ansQdel(ctx)
-      const check = await helper.channelStatus(ctx)
-      return startHandler({ctx, check});
+      await helper.ansQdel(ctx);
+      const check = await helper.channelStatus(ctx);
+      return startHandler({ ctx, check });
     }
     if (ctx.match[0] === "next") {
       currentPage++;
