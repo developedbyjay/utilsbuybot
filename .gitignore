@@ -1,5 +1,4 @@
 node_modules
 config.env
-fly.toml
 Dokerfile
 dev-data
